@@ -1,0 +1,42 @@
+package jdbc;
+
+import java.sql.*;
+
+public class JDBCtext01
+{
+	public static void main(String[] args){
+		Connection conn = null;
+		//与特定数据库的连接，在连接上下文中执行SQL语句并返回结果。
+		Statement stmt = null;
+		//createStatement 创建一个statement的对象来将sql语句发送到数据库，不带参数的sql语句通常使用statement对象执行。
+		String sql;
+		try{
+
+		Driver driver = new com.mysql.cj.jdbc.Driver();
+
+		DriverManager.registerDriver(driver);
+		
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/asset?"
+				+"useUnicode=TRUE"
+				+"&characterEncoding=utf-8"
+				+"&useSSL= FALSE "
+				+"&serverTimezone=GMT%2B8","root","zyx19991226");
+				
+		System.out.println("成功连接数据库");
+		//获取数据库操作对象
+		stmt = conn.createStatement();
+		System.out.println(stmt);
+		//执行SQL语句：DQL语句
+		sql = "";
+		ResultSet rs = stmt.executeQuery(sql);
+		System.out.print(rs);
+		
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+			
+		}finally {
+			
+		}
+	}
+}
